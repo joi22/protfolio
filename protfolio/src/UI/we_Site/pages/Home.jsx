@@ -79,7 +79,7 @@ const Home = () => {
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-[2px] rounded-lg">
               <div className="bg-[#14141c] rounded-lg p-6">
                 <h3 className="text-xl font-bold mb-2">
-                   <span className="text-white">Shopify App Development</span>
+                  <span className="text-white">Shopify App Development</span>
                 </h3>
                 <p className="text-gray-300">
                   I build private and public Shopify apps to extend store functionality and integrate business workflows.
@@ -90,7 +90,7 @@ const Home = () => {
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-[2px] rounded-lg">
               <div className="bg-[#14141c] rounded-lg p-6">
                 <h3 className="text-xl font-bold mb-2">
-                   <span className="text-white">Website Development</span>
+                  <span className="text-white">Website Development</span>
                 </h3>
                 <p className="text-gray-300">
                   I build private and public Shopify apps to extend store functionality and integrate business workflows.
@@ -174,54 +174,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section>
-           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {projects.map((project, idx) => (
-          <div
-            key={idx}
-            className="bg-[#111827] rounded-xl overflow-hidden shadow-lg border border-gray-800 hover:scale-105 transition-transform"
-          >
-            <img
-              src={project.image}
-              alt="Project preview"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4 bg-[#0f172a]">
-              <p className="text-center text-lg font-semibold">
-                {project.title}
-              </p>
-              <p className="text-center text-sm text-gray-400">
-                {project.stack}
-              </p>
-              <div className="text-right mt-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-white hover:text-blue-400"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 inline"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M14 3h7m0 0v7m0-7L10 14"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    
-      </section>
+  
     </>)
 }
 
