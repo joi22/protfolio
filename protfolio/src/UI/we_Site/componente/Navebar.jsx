@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import logo from './../../../../public/media/logo.png'
 import TopHeader from './TopHeader';
 
 const Navebar = () => {
@@ -11,7 +12,9 @@ const Navebar = () => {
     <TopHeader/>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <div className="text-xl font-bold text-white">MyLogo</div>
+        <div className="text-xl font-bold text-white">
+          <a href="/"><img src={logo} width={170} alt="" /></a>
+        </div>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center space-x-8 text-white text-sm font-medium">
