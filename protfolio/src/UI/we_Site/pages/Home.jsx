@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { FaGithub, FaLinkedin, FaTwitter, FaFacebook, FaDownload, FaCode, FaDatabase, FaServer, FaMobile, FaGlobe, FaLaptopCode, FaLaptop, FaPaintBrush, FaMobileAlt, FaSitemap, FaChevronLeft, FaChevronRight, FaShoppingCart, FaStore, FaPalette, FaWindowMaximize, FaTshirt } from 'react-icons/fa'
 import ContactForm from '../componente/ContactForm'
+import gymImage from '../../../assets/media/Gym.png'
 
 const Home = () => {
   const [activeService, setActiveService] = useState(1) // Start with Shopify Website Developer highlighted
@@ -47,7 +48,7 @@ const Home = () => {
       title: "Shopify Gym Clothing Store",
       stack: "Shopify + Liquid",
       description: "Complete Shopify e-commerce website for gym clothing and activewear. Features Black Friday promotions, product catalog, and modern design.",
-      image: "/sample-project.png",
+      image: gymImage,
       category: "Web Design",
       icon: <FaTshirt />
     },
@@ -452,8 +453,20 @@ const Home = () => {
                 whileHover={{ scale: 1.05, y: -10 }}
                 className="bg-black/50 border-2 border-red-500/50 rounded-xl overflow-hidden backdrop-blur-sm hover:border-red-500 transition"
               >
-                <div className="h-48 bg-gradient-to-br from-red-500/20 to-red-900/20 flex items-center justify-center">
-                  {project.icon ? (
+                <div className="h-48 bg-gradient-to-br from-red-500/20 to-red-900/20 flex items-center justify-center overflow-hidden">
+                  {project.image && typeof project.image === 'string' && project.image.includes('Gym.png') ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : project.image && typeof project.image !== 'string' ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : project.icon ? (
                     <div className="text-6xl text-red-500">{project.icon}</div>
                   ) : (
                     <FaCode className="text-6xl text-red-500" />
