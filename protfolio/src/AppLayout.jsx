@@ -4,11 +4,11 @@ import Navebar from './UI/we_Site/componente/Navebar'
 
 const AppLayout = () => {
     return (
-        <>
+        <div className="bg-glow min-h-screen">
            <Navebar/>
-                <Outlet />
-
-        </>)
+           <Outlet />
+        </div>
+    )
 }
 
 export default AppLayout

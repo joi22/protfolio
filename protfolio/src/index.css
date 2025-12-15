@@ -2,14 +2,49 @@
 
 .bg-glow {
   margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgb(28 8 61 / 100%) 30%, rgb(11 44 153) 50%, rgb(4 33 69 / 100%) 70%);
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #fff;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(20, 0, 0) 30%, rgb(40, 0, 0) 50%, rgb(20, 0, 0) 70%, rgb(0, 0, 0) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  position: relative;
 }
-header{
-  box-shadow: 0px 0px 8px #1c1616e6;
+
+.bg-glow::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 2px 2px, rgba(220, 38, 38, 0.15) 1px, transparent 0);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* header {
+  box-shadow: 0px 0px 8px rgba(220, 38, 38, 0.3);
+} */
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
