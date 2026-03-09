@@ -1,8 +1,10 @@
-
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AppLayout from './AppLayout'
 import Home from './UI/we_Site/pages/Home'
+import Projects from './UI/we_Site/pages/Projects'
+import ProjectDetail from './UI/we_Site/pages/ProjectDetail'
+import Admin from './UI/we_Site/pages/Admin'
 
 function App() {
 
@@ -13,6 +15,18 @@ function App() {
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/projects',
+        element: <Projects />
+      },
+      {
+        path: '/project/:id',
+        element: <ProjectDetail />
+      },
+      {
+        path: '/admin',
+        element: <Admin />
       }
     ]
   }])

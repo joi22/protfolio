@@ -1,94 +1,107 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import logo from './../../../assets/media/logo.png'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    const checkAdmin = () => {
+      setIsAdmin(localStorage.getItem('adminAuth') === 'true')
+    }
+    checkAdmin()
+    // Listen for changes (in case of login/logout on the same page)
+    window.addEventListener('storage', checkAdmin)
+    return () => window.removeEventListener('storage', checkAdmin)
+  }, [])
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setActiveSection('home')
+    } else if (location.pathname === '/projects') {
+      setActiveSection('ourworks')
+    } else {
+      setActiveSection('')
+    }
+  }, [location])
 
   const navItems = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'Services', href: '#services', id: 'services' },
-    { name: 'Our Works', href: '#projects', id: 'ourworks' },
-    { name: 'Reviews', href: '#testimonials', id: 'reviews' },
-    { name: 'Contact Us', href: '#contact', id: 'contactus' }
+    { name: 'Home', href: '/#home', id: 'home', path: '/' },
+    { name: 'Services', href: '/#services', id: 'services', path: '/' },
+    { name: 'Projects', href: '/projects', id: 'ourworks', path: '/projects' },
+    { name: 'Reviews', href: '/#testimonials', id: 'reviews', path: '/' },
+    { name: 'Admin', href: '/admin', id: 'admin', path: '/admin' }
   ]
 
-  const handleNavClick = (id) => {
-    setActiveSection(id)
+  const handleNavClick = (item) => {
+    setActiveSection(item.id)
+    if (location.pathname !== '/' && item.path === '/') {
+      navigate('/')
+      // Wait for navigation and then scroll
+      setTimeout(() => {
+        const element = document.getElementById(item.id)
+        if (element) element.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
   }
 
   return (
-    <motion.header 
+    <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 px-4"
+      className="fixed top-0 left-0 w-full z-50 flex justify-center pt-8 px-4"
     >
       {/* Pill-shaped Navigation Bar */}
-      <motion.nav 
-        className="max-w-6xl w-full bg-black/90 backdrop-blur-md border border-red-500/30 rounded-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between"
-        style={{
-          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 0, 0, 0.95) 100%)',
-          boxShadow: '0 4px 20px rgba(220, 38, 38, 0.2)'
-        }}
+      <motion.nav
+        className="max-w-6xl w-full bg-card/80 backdrop-blur-2xl border border-white/5 rounded-[32px] px-6 md:px-10 py-4 flex items-center justify-between shadow-2xl"
       >
         {/* Logo */}
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.05 }}
           className="flex-shrink-0"
         >
-          <a href="/" className="flex items-center">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-black/50">
-              <span className="text-red-500 text-xl md:text-2xl font-bold">8</span>
+          <Link to="/" className="flex items-center">
+            <div className="w-12 h-12 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 group hover:border-accent transition">
+              <span className="text-accent text-2xl font-black group-hover:scale-110 transition">8</span>
             </div>
-          </a>
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex items-center space-x-4 lg:space-x-6 text-white text-sm md:text-base font-medium flex-1 justify-center">
+        <ul className="hidden md:flex items-center space-x-2 lg:space-x-4 text-text text-sm font-bold flex-1 justify-center">
           {navItems.map((item, idx) => (
             <li key={idx}>
-              <motion.a 
-                href={item.href}
-                onClick={() => handleNavClick(item.id)}
-                whileHover={{ color: '#ef4444' }}
-                className={`transition relative py-2 ${
-                  activeSection === item.id 
-                    ? 'text-red-500' 
-                    : 'text-white hover:text-red-400'
-                }`}
+              <Link
+                to={item.href}
+                onClick={() => handleNavClick(item)}
+                className={`transition relative px-6 py-2.5 rounded-full hover:bg-white/5 flex items-center gap-2 ${activeSection === item.id
+                  ? 'text-accent bg-accent/5'
+                  : 'text-gray-400 hover:text-text'
+                  }`}
               >
-                {item.name}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-red-500 rounded-full"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
+                {item.id === 'admin' && isAdmin ? 'Dashboard' : item.name}
+                {item.id === 'admin' && isAdmin && (
+                  <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
                 )}
-              </motion.a>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* Contact Us Button */}
         <div className="hidden md:block flex-shrink-0">
-          <motion.a 
-            href="#contact"
+          <motion.a
+            href="/#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-red-500 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-red-600 transition flex items-center gap-2"
-            style={{
-              boxShadow: '0 2px 10px rgba(220, 38, 38, 0.4)'
-            }}
+            className="bg-accent text-white px-8 py-3 rounded-2xl font-bold hover:bg-hover transition shadow-xl shadow-accent/20"
           >
-            <span className="flex gap-1">
-              <span className="w-1 h-1 bg-white rounded-full"></span>
-              <span className="w-1 h-1 bg-white rounded-full"></span>
-              <span className="w-1 h-1 bg-white rounded-full"></span>
-            </span>
             Contact Us
           </motion.a>
         </div>
@@ -96,16 +109,14 @@ const Navebar = () => {
         {/* Mobile Menu Toggle */}
         <motion.button
           whileTap={{ scale: 0.9 }}
-          className="md:hidden text-white focus:outline-none ml-auto"
+          className="md:hidden text-text focus:outline-none ml-auto"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
+          <div className="space-y-1.5 p-2">
+            <span className={`block w-6 h-0.5 bg-accent rounded-full transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`block w-5 h-0.5 bg-accent rounded-full transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-accent rounded-full transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          </div>
         </motion.button>
       </motion.nav>
 
@@ -113,46 +124,35 @@ const Navebar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-full mt-4 left-4 right-4 bg-black/95 backdrop-blur-md border border-red-500/30 rounded-2xl overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 0, 0, 0.95) 100%)',
-            }}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="md:hidden absolute top-full mt-6 left-4 right-4 bg-card/95 backdrop-blur-3xl border border-white/5 rounded-[40px] overflow-hidden shadow-2xl"
           >
-            <div className="px-6 py-4 space-y-4">
+            <div className="px-8 py-10 space-y-6">
               {navItems.map((item, idx) => (
-                <motion.a
+                <Link
                   key={idx}
-                  href={item.href}
+                  to={item.href}
                   onClick={() => {
                     setIsOpen(false)
-                    handleNavClick(item.id)
+                    handleNavClick(item)
                   }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`block py-2 transition ${
-                    activeSection === item.id 
-                      ? 'text-red-500' 
-                      : 'text-white hover:text-red-400'
-                  }`}
+                  className={`block text-2xl font-bold transition ${activeSection === item.id
+                    ? 'text-accent'
+                    : 'text-gray-400 hover:text-text'
+                    }`}
                 >
                   {item.name}
-                </motion.a>
+                </Link>
               ))}
-              <motion.a
-                href="#contact"
+              <Link
+                to="/#contact"
                 onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.1 }}
-                className="block bg-red-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-red-600 transition"
+                className="block bg-accent text-white px-8 py-5 rounded-[24px] font-bold text-center text-xl shadow-xl shadow-accent/20"
               >
                 Contact Us
-              </motion.a>
+              </Link>
             </div>
           </motion.div>
         )}
