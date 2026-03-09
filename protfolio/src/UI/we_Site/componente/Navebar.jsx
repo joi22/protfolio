@@ -63,13 +63,25 @@ const Navebar = () => {
       >
         {/* Logo */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
           className="flex-shrink-0"
         >
-          <Link to="/" className="flex items-center">
-            <div className="w-12 h-12 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 group hover:border-accent transition">
-              <span className="text-accent text-2xl font-black group-hover:scale-110 transition">8</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative w-11 h-11">
+              {/* Glowing ring */}
+              <div className="absolute inset-0 rounded-full bg-accent/20 blur-md group-hover:bg-accent/40 transition-all duration-300"></div>
+              <div className="absolute inset-0 rounded-full border-2 border-accent/50 group-hover:border-accent transition-all duration-300"></div>
+              {/* Logo image */}
+              <img
+                src="/logo.png"
+                alt="White Tiger Logo"
+                className="relative z-10 w-full h-full rounded-full object-contain p-0.5 drop-shadow-[0_0_8px_rgba(124,58,237,0.8)]"
+              />
             </div>
+            <span className="hidden sm:block text-text font-bold text-base tracking-wide group-hover:text-accent transition-colors duration-300">
+              White Tiger
+            </span>
           </Link>
         </motion.div>
 
