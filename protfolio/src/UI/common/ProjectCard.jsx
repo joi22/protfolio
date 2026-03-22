@@ -30,7 +30,13 @@ const ProjectCard = ({ project, idx = 0 }) => {
                 <div className="p-10 flex flex-col flex-1">
                     <h3 className="text-text text-2xl font-black mb-3 group-hover:text-accent transition duration-300">{project.title}</h3>
                     <p className="text-accent text-sm font-bold tracking-widest uppercase mb-4 opacity-80">{project.stack}</p>
-                    <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed mb-8 flex-1">{project.description}</p>
+                    <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed mb-6 flex-1">{project.description}</p>
+                    {project.businessImpact && (
+                        <div className="mb-6 p-4 bg-accent/5 border border-accent/20 rounded-2xl">
+                            <p className="text-accent text-[11px] font-black uppercase tracking-widest mb-1">Business Impact</p>
+                            <p className="text-text text-sm font-medium leading-snug">{project.businessImpact}</p>
+                        </div>
+                    )}
                     <div className="mt-auto pt-6 border-t border-white/5 flex items-center gap-2 text-accent font-black text-sm uppercase tracking-widest group-hover:gap-4 transition-all">
                         Experience Story <FaChevronRight className="text-xs" />
                     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FaLinkedin, FaFacebook, FaInstagram, FaEnvelope, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaFacebook, FaInstagram, FaEnvelope, FaGithub, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { sendWhatsAppMessage } from '../../../services/WhatsAppService';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -24,19 +25,31 @@ const ContactForm = () => {
 
     try {
       // Send email using EmailJS
-      const result = await emailjs.send(
+      const emailResult = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_name: 'Muhammad Uzair', // Your name
+          to_name: 'Muhammad Uzair',
         },
         PUBLIC_KEY
       );
 
-      console.log('Email sent successfully!', result.text);
+      // Send WhatsApp Notification via WATI
+      // Note: Replace with your actual WhatsApp number in CountryCode_Number format
+      const myWhatsAppNumber = '923123456789'; 
+      const waMessage = `🚀 *New Lead from Portfolio!*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
+      
+      try {
+        await sendWhatsAppMessage(myWhatsAppNumber, waMessage);
+        console.log('WhatsApp notification sent!');
+      } catch (waError) {
+        console.warn('WhatsApp backup failed, but email was sent.', waError);
+      }
+
+      console.log('Email sent successfully!', emailResult.text);
       setSubmitStatus({
         type: 'success',
         message: 'Message sent successfully! I will get back to you soon.'
@@ -107,10 +120,27 @@ const ContactForm = () => {
                 <div>
                   <h4 className="text-gray-500 text-xs uppercase font-bold tracking-widest mb-1">Email Me</h4>
                   <a
-                    href="mailto:muhammad.uzair@example.com"
+                    href="mailto:mohmmaduzair799@gmai.com"
                     className="text-text hover:text-accent font-bold text-xl transition"
                   >
-                    muhammad.uzair@example.com
+                    mohmmaduzair799@gmai.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-6 group">
+                <div className="w-16 h-16 rounded-2xl bg-[#1dbf73]/10 flex items-center justify-center text-[#1dbf73] text-2xl group-hover:bg-[#1dbf73] group-hover:text-white transition shadow-lg shadow-[#1dbf73]/5">
+                  <FaWhatsapp />
+                </div>
+                <div>
+                  <h4 className="text-gray-500 text-xs uppercase font-bold tracking-widest mb-1">WhatsApp Me</h4>
+                  <a
+                    href="https://wa.me/923123456789"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text hover:text-[#1dbf73] font-bold text-xl transition"
+                  >
+                    +92 3082762326
                   </a>
                 </div>
               </div>
@@ -119,11 +149,11 @@ const ContactForm = () => {
                 <h4 className="text-gray-500 text-xs uppercase font-bold tracking-widest mb-6">Social Influence</h4>
                 <div className="flex space-x-6 text-2xl">
                   {[
-                    { icon: <FaGithub />, href: "#", label: "GitHub" },
-                    { icon: <FaLinkedin />, href: "#", label: "LinkedIn" },
-                    { icon: <FaTwitter />, href: "#", label: "Twitter" },
-                    { icon: <FaFacebook />, href: "#", label: "Facebook" },
-                    { icon: <FaInstagram />, href: "#", label: "Instagram" }
+                    { icon: <FaGithub />, href: "https://github.com/joi22", label: "GitHub" },
+                    { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/muhammad-uzair-b96379263", label: "LinkedIn" },
+                    { icon: <FaTwitter />, href: "https://x.com/webtecon100", label: "Twitter" },
+                    // { icon: <FaFacebook />, href: "#", label: "Facebook" },
+                    { icon: <FaInstagram />, href: "https://www.instagram.com/webtecon101/", label: "Instagram" }
                   ].map((social, idx) => (
                     <motion.a
                       key={idx}

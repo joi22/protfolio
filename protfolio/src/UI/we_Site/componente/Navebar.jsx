@@ -76,11 +76,11 @@ const Navebar = () => {
               <img
                 src="/logo.png"
                 alt="White Tiger Logo"
-                className="relative z-10 w-full h-full rounded-full object-contain p-0.5 drop-shadow-[0_0_8px_rgba(124,58,237,0.8)]"
+                className="relative z-10 w-full h-full rounded-full object-contain p-0.5 drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]"
               />
             </div>
             <span className="hidden sm:block text-text font-bold text-base tracking-wide group-hover:text-accent transition-colors duration-300">
-              White Tiger
+              Muhammad Uzair
             </span>
           </Link>
         </motion.div>
