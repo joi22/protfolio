@@ -33,9 +33,13 @@ export default function Navbar() {
                 />
 
                 <Link href="/">
-                    <div className="flex items-center gap-2 cursor-pointer">
-                        <span className="text-xl font-bold tracking-wider text-text-light">UZAIR.DEV</span>
-                        <span className="size-2 bg-accent rounded-full animate-pulse" />
+                    <div className="flex items-center gap-2 cursor-pointer group">
+                        <img 
+                            className="size-8 rounded-full border border-slate-800/80 object-cover group-hover:border-accent/60 transition" 
+                            src="https://cdn.shopify.com/s/files/1/0985/6470/2513/files/transprant_logo.jpg" 
+                            alt="Uzair.dev logo" 
+                        />
+                        <span className="text-xl font-bold tracking-wider text-text-light group-hover:text-accent transition">UZAIR.DEV</span>
                     </div>
                 </Link>
 

@@ -16,6 +16,7 @@ export default function RootLayout({ children, }: Readonly<{
     return (
         <html lang="en">
             <head>
+                <link rel="icon" href="https://cdn.shopify.com/s/files/1/0985/6470/2513/files/transprant_logo.jpg" />
                 <link rel="preload" href="/assets/background-splash.svg" as="image" />
             </head>
             <body>
