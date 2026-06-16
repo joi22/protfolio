@@ -42,10 +42,10 @@ export default function ContactPage() {
             <div className="absolute top-1/4 left-1/4 -z-10 size-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 -z-10 size-[450px] bg-accent/5 blur-[130px] rounded-full pointer-events-none" />
 
-            <SectionTitle 
-                text1="Get In Touch" 
-                text2="Start Your E-Commerce Build" 
-                text3="Have a project in mind? Let's discuss your specs or book a quick strategy session directly." 
+            <SectionTitle
+                text1="Get In Touch"
+                text2="Start Your E-Commerce Build"
+                text3="Have a project in mind? Let's discuss your specs or book a quick strategy session directly."
             />
 
             <div className="mt-16 max-w-5xl mx-auto flex flex-col lg:flex-row gap-12 z-10 relative">
@@ -60,23 +60,24 @@ export default function ContactPage() {
 
                     {/* Contact Quicklinks */}
                     <div className="space-y-4">
-                        <a 
-                            href="mailto:contact@pixels.studio" 
+                        <a
+                            href="mailto:contact@pixels.studio"
                             className="flex items-center gap-4 p-4 rounded-xl border border-slate-850 bg-slate-900/10 hover:border-accent/30 hover:bg-slate-900/30 transition-all duration-300 group"
                         >
                             <div className="size-10 rounded-lg bg-slate-850 flex items-center justify-center border border-slate-800 text-slate-400 group-hover:text-accent transition">
                                 <Mail size={18} />
                             </div>
+
                             <div>
                                 <span className="text-[10px] text-slate-500 font-semibold uppercase block">Mail Address</span>
                                 <span className="text-sm font-semibold text-text-light group-hover:text-accent transition">contact@pixels.studio</span>
                             </div>
                         </a>
 
-                        <a 
-                            href="https://www.instagram.com/uzair.mohmmad.315/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                        <a
+                            href="https://www.instagram.com/uzair.mohmmad.315/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex items-center gap-4 p-4 rounded-xl border border-slate-850 bg-slate-900/10 hover:border-accent/30 hover:bg-slate-900/30 transition-all duration-300 group"
                         >
                             <div className="size-10 rounded-lg bg-slate-850 flex items-center justify-center border border-slate-800 text-slate-400 group-hover:text-accent transition">
@@ -88,10 +89,10 @@ export default function ContactPage() {
                             </div>
                         </a>
 
-                        <a 
-                            href="https://www.linkedin.com/in/muhammad-uzair-b96379263/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                        <a
+                            href="https://www.linkedin.com/in/muhammad-uzair-b96379263/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex items-center gap-4 p-4 rounded-xl border border-slate-850 bg-slate-900/10 hover:border-accent/30 hover:bg-slate-900/30 transition-all duration-300 group"
                         >
                             <div className="size-10 rounded-lg bg-slate-850 flex items-center justify-center border border-slate-800 text-slate-400 group-hover:text-accent transition">
@@ -120,10 +121,10 @@ export default function ContactPage() {
                             <li>🌍 LOCATION: Google Meet video</li>
                             <li>💵 PRICE: Free consult</li>
                         </ul>
-                        
-                        <a 
-                            href="https://calendly.com/placeholder" 
-                            target="_blank" 
+
+                        <a
+                            href="https://calendly.com/placeholder"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="w-full text-center block bg-slate-800 hover:bg-slate-700 text-text-light font-semibold text-xs py-2.5 rounded-lg border border-slate-700/80 transition-all"
                         >
@@ -136,10 +137,10 @@ export default function ContactPage() {
                 <div className="w-full lg:w-7/12">
                     <div className="p-8 rounded-2xl border border-slate-850 bg-slate-900/10 space-y-6 relative overflow-hidden">
                         <h3 className="text-xl font-bold text-text-light">Send an Inquiry</h3>
-                        
+
                         <AnimatePresence mode="wait">
                             {isSuccess ? (
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
@@ -152,7 +153,7 @@ export default function ContactPage() {
                                     <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
                                         Thank you for reaching out. A developer will review your project details and get back to you at your email address within 12 hours.
                                     </p>
-                                    <button 
+                                    <button
                                         onClick={() => setIsSuccess(false)}
                                         className="text-xs font-semibold text-accent hover:underline mt-4 cursor-pointer"
                                     >
@@ -160,8 +161,8 @@ export default function ContactPage() {
                                     </button>
                                 </motion.div>
                             ) : (
-                                <motion.form 
-                                    onSubmit={handleSubmit} 
+                                <motion.form
+                                    onSubmit={handleSubmit}
                                     className="space-y-5"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -170,8 +171,8 @@ export default function ContactPage() {
                                     {/* Name Input */}
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold text-slate-450 uppercase tracking-wider block">Your Name</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             required
                                             value={formState.name}
                                             onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -183,8 +184,8 @@ export default function ContactPage() {
                                     {/* Email Input */}
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold text-slate-450 uppercase tracking-wider block">Email Address</label>
-                                        <input 
-                                            type="email" 
+                                        <input
+                                            type="email"
                                             required
                                             value={formState.email}
                                             onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -197,7 +198,7 @@ export default function ContactPage() {
                                         {/* Project Type Selector */}
                                         <div className="space-y-2">
                                             <label className="text-xs font-semibold text-slate-450 uppercase tracking-wider block">Project Type</label>
-                                            <select 
+                                            <select
                                                 value={formState.projectType}
                                                 onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
                                                 className="w-full px-4 py-3 bg-slate-950/40 border border-slate-800/80 rounded-xl focus:border-accent text-slate-350 text-xs outline-none transition cursor-pointer"
@@ -213,7 +214,7 @@ export default function ContactPage() {
                                         {/* Budget Tier Selector */}
                                         <div className="space-y-2">
                                             <label className="text-xs font-semibold text-slate-450 uppercase tracking-wider block">Budget Tier</label>
-                                            <select 
+                                            <select
                                                 value={formState.budget}
                                                 onChange={(e) => setFormState({ ...formState, budget: e.target.value })}
                                                 className="w-full px-4 py-3 bg-slate-950/40 border border-slate-800/80 rounded-xl focus:border-accent text-slate-350 text-xs outline-none transition cursor-pointer"
@@ -230,7 +231,7 @@ export default function ContactPage() {
                                     {/* Message Textarea */}
                                     <div className="space-y-2">
                                         <label className="text-xs font-semibold text-slate-450 uppercase tracking-wider block">Project Requirements</label>
-                                        <textarea 
+                                        <textarea
                                             rows={5}
                                             required
                                             value={formState.message}
@@ -243,8 +244,8 @@ export default function ContactPage() {
                                     {/* Submit Button */}
                                     <div className="pt-2">
                                         <MagneticButton className="w-full sm:w-auto">
-                                            <button 
-                                                type="submit" 
+                                            <button
+                                                type="submit"
                                                 disabled={isSubmitting}
                                                 className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white font-semibold text-xs px-8 py-3.5 rounded-full transition cursor-pointer disabled:opacity-50"
                                             >
