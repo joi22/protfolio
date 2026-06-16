@@ -24,11 +24,19 @@ export default function PageLoader() {
                     }}
                 >
                     <div className="flex flex-col items-center gap-4">
+                        <motion.img 
+                            className="size-16 rounded-full border border-slate-800 object-cover" 
+                            src="https://cdn.shopify.com/s/files/1/0985/6470/2513/files/transprant_logo.jpg" 
+                            alt="Uzair.dev logo loading"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                        />
                         <motion.h1 
                             className="text-3xl md:text-5xl font-bold tracking-widest text-text-light flex items-center gap-2"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
                         >
                             <span>UZAIR</span>
                             <span className="text-accent">.</span>
